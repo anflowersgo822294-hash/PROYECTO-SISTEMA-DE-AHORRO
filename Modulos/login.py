@@ -1,5 +1,5 @@
 import streamlit as st
-from Modulos.config.conexion import obtener_conexion
+from modulo.config.conexion import obtener_conexion   # corregido: Modulos → modulo
 
 # Función para verificar si el usuario existe en la tabla Socias
 def verificar_usuario(usuario, contrasena):
@@ -10,7 +10,8 @@ def verificar_usuario(usuario, contrasena):
 
     try:
         cursor = con.cursor()
-        query = "SELECT Usuario FROM Socias WHERE Usuario = %s AND Contraseña = %s"
+        # Ajustado a los nombres reales de las columnas en minúscula
+        query = "SELECT usuario FROM Socias WHERE usuario = %s AND contraseña = %s"
         cursor.execute(query, (usuario, contrasena))
         result = cursor.fetchone()
         return result[0] if result else None
