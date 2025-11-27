@@ -1,8 +1,7 @@
 # app.py
 import streamlit as st
-from modulos.login import login
-from modulos.ahorro import mostrar_ahorro  # Importamos la función mostrar_ahorro del módulo ahorro
-
+from Modulos.login import login
+from Modulos.ahorro import mostrar_ahorro
 # Primero ejecutamos el login
 if login():
     # Si el login fue exitoso, mostramos el contenido de ahorro
