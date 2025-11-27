@@ -11,12 +11,11 @@ def obtener_conexion():
             port=3306
         )
         if conexion.is_connected():
-            print("✅ Conexión establecida")
+            print("✅ Conexión establecida con la base de datos")
             return conexion
         else:
             print("❌ Conexión fallida (is_connected = False)")
             return None
-    except mysql.connector.Error as e:
+    except Error as e:
         print(f"❌ Error al conectar: {e}")
         return None
-
