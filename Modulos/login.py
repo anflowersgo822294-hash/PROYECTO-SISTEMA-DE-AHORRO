@@ -1,6 +1,7 @@
 import streamlit as st
 from Modulos.config.conexion import obtener_conexion
 
+# Función para verificar credenciales en la tabla Socias
 def verificar_usuario(usuario, contrasena):
     con = obtener_conexion()
     if not con:
@@ -9,7 +10,8 @@ def verificar_usuario(usuario, contrasena):
 
     try:
         cursor = con.cursor()
-        query = "SELECT Tipo_usuario FROM USUARIO WHERE usuario = %s AND contrasena = %s"
+        # Consulta adaptada a tu tabla y columnas
+        query = "SELECT Usuario FROM Socias WHERE Usuario = %s AND Contraseña = %s"
         cursor.execute(query, (usuario, contrasena))
         result = cursor.fetchone()
         return result[0] if result else None
@@ -19,28 +21,30 @@ def verificar_usuario(usuario, contrasena):
     finally:
         con.close()
 
+# Función de login con Streamlit
 def login():
     st.title("🔑 Inicio de sesión")
 
-    # Si ya hay sesión iniciada, mostrar mensaje y no repetir formulario
+    # Si ya hay sesión iniciada, mostrar mensaje
     if st.session_state.get("sesion_iniciada"):
-        st.success(f"Bienvenido {st.session_state['usuario']} ({st.session_state['tipo_usuario']}) 👋")
+        st.success(f"Bienvenida {st.session_state['usuario']} 👋")
         return True
 
-    # Mostrar mensaje persistente si ya hubo conexión exitosa
+    # Mostrar mensaje si la conexión fue exitosa antes
     if st.session_state.get("conexion_exitosa"):
         st.info("✅ Conexión a la base de datos establecida correctamente.")
 
+    # Campos de entrada
     usuario = st.text_input("Usuario", key="usuario_input")
     contrasena = st.text_input("Contraseña", type="password", key="contrasena_input")
 
+    # Botón de inicio de sesión
     if st.button("Iniciar sesión"):
-        tipo = verificar_usuario(usuario, contrasena)
-        if tipo:
+        resultado = verificar_usuario(usuario, contrasena)
+        if resultado:
             st.session_state["usuario"] = usuario
-            st.session_state["tipo_usuario"] = tipo
             st.session_state["sesion_iniciada"] = True
-            st.success(f"Bienvenido {usuario} ({tipo}) 👋")
+            st.success(f"Bienvenida {usuario} 👋")
             return True
         else:
             st.error("❌ Credenciales incorrectas.")
