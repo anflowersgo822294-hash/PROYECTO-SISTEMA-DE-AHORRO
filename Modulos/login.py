@@ -1,5 +1,5 @@
 import streamlit as st
-from modulo.config.conexion import obtener_conexion   # corregido: Modulos → modulo
+from Modulos.config.conexion import obtener_conexion   # correcto: sigue siendo Modulos
 
 # Función para verificar si el usuario existe en la tabla Socias
 def verificar_usuario(usuario, contrasena):
@@ -43,6 +43,8 @@ def login():
         resultado = verificar_usuario(usuario, contrasena)
         if resultado:
             st.session_state["usuario"] = usuario
+            # Si no tienes columna tipo_usuario en la tabla, puedes asignar un valor fijo:
+            st.session_state["tipo_usuario"] = "Usuario"  
             st.session_state["sesion_iniciada"] = True
             st.success(f"Bienvenida {usuario} 👋")
             return True
