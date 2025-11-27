@@ -2,7 +2,20 @@ import streamlit as st
 from datetime import datetime
 
 def mostrar_ahorro():
-    st.write("Bienvenido al sistema de ahorro")
+    st.title("💰 Sistema de ahorro")
+
+    # Formulario para ingresar datos de ahorro
+    id_ahorro = st.text_input("ID Ahorro")
+    id_miembro = st.text_input("ID Miembro")
+    id_reunion = st.text_input("ID Reunión")
+    monto = st.number_input("Monto de ahorro", min_value=0.0, step=0.01)
+    otras_actividades = st.number_input("Otros ingresos", min_value=0.0, step=0.01)
+
+    if st.button("Registrar ahorro"):
+        ahorro = Ahorro(id_ahorro, id_miembro, id_reunion, monto, otras_actividades)
+        st.success("✅ Ahorro registrado correctamente")
+        st.write("### 📊 Resumen del ahorro")
+        st.json(ahorro.resumen())
 
 class Ahorro:
     def __init__(self, id_ahorro, id_miembro, id_reunion, monto, otras_actividades=0.0):
