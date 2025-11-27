@@ -1,6 +1,8 @@
-# ahorro.py
-
+import streamlit as st
 from datetime import datetime
+
+def mostrar_ahorro():
+    st.write("Bienvenido al sistema de ahorro")
 
 class Ahorro:
     def __init__(self, id_ahorro, id_miembro, id_reunion, monto, otras_actividades=0.0):
@@ -26,9 +28,5 @@ class Ahorro:
             "Fecha": self.fecha_registro.strftime("%Y-%m-%d %H:%M:%S")
         }
 
-# Simulación de uso
 if __name__ == "__main__":
-    ahorro1 = Ahorro(id_ahorro=1, id_miembro=101, id_reunion=5, monto=25.0, otras_actividades=5.0)
-    print("📌 Registro de Ahorro:")
-    for clave, valor in ahorro1.resumen().items():
-        print(f"{clave}: {valor}")
+    mostrar_ahorro()
