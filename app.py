@@ -1,6 +1,6 @@
 import streamlit as st
-from modulo.login import login          # corregido: Modulos → modulo
-from modulo.ahorro import mostrar_ahorro
+from Modulos.login import login          # correcto: sigue siendo Modulos
+from Modulos.ahorro import mostrar_ahorro
 
 # Primero ejecutamos el login
 if login():
