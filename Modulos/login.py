@@ -11,7 +11,7 @@ def verificar_usuario(usuario, contrasena):
     try:
         cursor = con.cursor()
         # Ajustado a los nombres reales de las columnas en minúscula
-        query = "SELECT usuario FROM Socias WHERE usuario = %s AND contraseña = %s"
+        query = "SELECT tipo_usuario FROM Socias WHERE usuario = %s AND contraseña = %s"
         cursor.execute(query, (usuario, contrasena))
         result = cursor.fetchone()
         return result[0] if result else None
