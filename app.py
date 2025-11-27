@@ -1,11 +1,11 @@
 import streamlit as st
-from Modulos.login import login
-from Modulos.ahorro import mostrar_ahorro
+from modulo.login import login          # corregido: Modulos → modulo
+from modulo.ahorro import mostrar_ahorro
 
 # Primero ejecutamos el login
 if login():
     # Mostrar contenido según el tipo de usuario
-    if st.session_state["tipo_usuario"] == "Administrador":
+    if st.session_state.get("tipo_usuario") == "Administrador":
         st.subheader("🔧 Panel de administración")
         # Aquí puedes agregar funciones exclusivas para administradores
     else:
